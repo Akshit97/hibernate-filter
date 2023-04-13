@@ -11,38 +11,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
-public class UserController {
-    private final UserService userService;
+@RequestMapping("/api/company")
+public class CompanyController {
     private final CompanyService companyService;
 
     @Autowired
-    public UserController(UserService userService, CompanyService companyService) {
-        this.userService = userService;
+    public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        Optional<User> user = userService.findById(id);
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
+    public ResponseEntity<Company> findById(@PathVariable Long id) {
+        Optional<Company> company = companyService.findById(id);
+        if (company.isPresent()) {
+            return ResponseEntity.ok(company.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
-        Optional<Company> companyOptional = companyService.findById(1L);
-        Company company = companyOptional.get();
-        user.setCompany(company);
-        User savedUser = userService.save(user);
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<Company> save(@RequestBody Company company) {
+        Company savedCompany = companyService.save(company);
+        return ResponseEntity.ok(savedCompany);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        userService.delete(id);
+        companyService.delete(id);
     }
 }

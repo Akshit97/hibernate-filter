@@ -18,6 +18,7 @@ public class EnableFilterAspect {
         if (retVal != null && EntityManager.class.isInstance(retVal)) {
             Session session = ((EntityManager) retVal).unwrap(Session.class);
             session.enableFilter("countryFilter").setParameter("country", "India");
+            session.enableFilter("countryFilter1").setParameter("country", "India");
         }
     }
 
