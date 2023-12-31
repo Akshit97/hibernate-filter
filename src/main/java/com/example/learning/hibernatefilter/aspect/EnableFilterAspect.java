@@ -1,6 +1,6 @@
 package com.example.learning.hibernatefilter.aspect;
 
-import jakarta.persistence.EntityManager;
+import javax.persistence.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
